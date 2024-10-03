@@ -1,6 +1,7 @@
 const User = require("../Models/usersModel");
 const axios = require("axios");
 const generateAcc = async ({ userName, email }) => {
+  return;
   const {
     MONNIFY_API_URL,
     MONNIFY_API_KEY,
