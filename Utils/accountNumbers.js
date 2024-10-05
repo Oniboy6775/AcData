@@ -1,7 +1,6 @@
 const User = require("../Models/usersModel");
 const axios = require("axios");
-const generateAcc = async ({ userName, email }) => {
-  return;
+const generateAcc = async ({ userName, email, bvn, nin }) => {
   const {
     MONNIFY_API_URL,
     MONNIFY_API_KEY,
@@ -34,6 +33,8 @@ const generateAcc = async ({ userName, email }) => {
         customerEmail: email,
         customerName: userName,
         getAllAvailableBanks: true,
+        bvn,
+        nin,
       },
       {
         headers: {
@@ -43,6 +44,7 @@ const generateAcc = async ({ userName, email }) => {
     );
     console.log("generating account number for the new user");
     const accountList = accountDetails.data.responseBody.accounts;
+    const accountName = accountDetails.data.responseBody.accountName;
 
     let userToUpdate = await User.findOne({ email, userName });
 
@@ -52,9 +54,10 @@ const generateAcc = async ({ userName, email }) => {
         $push: { accountNumbers: accountList },
       }
     );
-    console.log(" account number generated for the new user");
+    return { status: true, msg: accountName };
   } catch (error) {
     console.log(error);
+    return { status: false, msg: error.response.data.responseMessage };
   }
 };
 module.exports = generateAcc;
