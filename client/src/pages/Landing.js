@@ -265,10 +265,7 @@ const Landing = () => {
             <div className="">
               <div className=" ">
                 <p className="uppercase text-blue-500">Office address</p>
-                <p>
-                  Address No 18 behind Alh Ayo House sawmill area
-                  Ilorin, kwara state
-                </p>
+                <p>52 yawo road samaru zaria</p>
               </div>
               <div className=" ">
                 <p className="uppercase text-blue-500">phone number</p>
